@@ -1,4 +1,4 @@
-//HelloCanvas.js
+//
 
 //顶点着色器程序 GLSL ES语言
 var VSHADER_SOURCE =

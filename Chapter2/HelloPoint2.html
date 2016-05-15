@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>HelloPoint2</title>
+	<!-- 
+	WebGL程序包括运行在浏览器中得JavaScript和运行在WebGL系统的着色器程序这两个部分。
+	顶点着色器控制点得位置和大小，片元着色器控制点得颜色；
+	着色器程序：
+	GLSL中得数据类型：
+		-----------------------------
+		float 表示浮点数
+		vec4  表示由四个浮点数组成的矢量
+			 |float|float|float|float|
+		-----------------------------
+	齐次坐标：由四个分量组成的矢量；
+		（x,y,z,w）等价于三维坐标(x/w,y/w,z/w)
+	片元：显示在屏幕上的一个像素（包括像素的位置、颜色和其他信息）；
+	着色器代码必须预先处理成单个字符串形式，'\n'并无特殊含义，只是为了出错时容易查找；
+
+	------------------------------------------------------------------------------------
+	gl.drawArrays(mode, first, count) //执行顶点着色器，按照mode参数指定的方式绘制图形
+	------------------------------------------------------------------------------------
+	参数			mode			指定绘制方式，常量符号：gl.POINTS,gl.LINES,gl.LINE_STRIP,
+								gl.LINE_LOOP,gl.TRIANGLES,gl.TRIANGLE_STRIP,gl.TRIANGLE_FAN
+				first			指定从哪个顶点开始绘制（整型数）
+				count			指定绘制需要用到多少个顶点（整型数）
+	返回值		无
+	错误			INVALID_ENUM	传入mode参数不是前述参数之一
+				INVALID_VALUE	参数first或count是负数
+	-------------------------------------------------------------------------------------
+	-->
+</head>
+<body onload="main()">
+	<canvas id="webgl" width="400" height="400">
+		Please use the browser supporting "canvas"
+	</canvas>
+
+	<script src="../lib/webgl-utils.js"></script>
+	<script src="../lib/webgl-debug.js"></script>
+	<script src="../lib/cuon-utils.js"></script>
+	<script src="HelloPoint2.js"></script>
+</body>
+</html>
+
