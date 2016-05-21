@@ -8,6 +8,13 @@
 //		attribute 被称为存储限定符，表示其声明的是一个attribute变量，必须声明为全局变量。
 //		
 //
+//	使用缓冲区向顶点着色器传入多个顶点的数据，需要5个步骤：
+//		|
+//		|--创建缓冲区对象（gl.createBuffer()）
+//		|--绑定缓冲区对象（gl.bindBuffer()）
+//		|--将数据写入缓冲区对象（gl.bufferData()）
+//		|--将缓冲区对象分配给一个attribute变量（gl.vertexAttribPointer()）
+//		|--开启attribute变量（gl.enableVertexAttribArray()）
 //
 //
 //顶点着色器程序 GLSL ES语言
@@ -43,12 +50,12 @@ function main(){
 	}
 
 	//获取attribute变量的存储位置
-	var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
+	// var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
 
-	if (a_Position<0) {
-		console.log('Failed to get the storage location of a_Position');
-		return;
-	}
+	// if (a_Position<0) {
+	// 	console.log('Failed to get the storage location of a_Position');
+	// 	return;
+	// }
 
 	var a_PointSize = gl.getAttribLocation(gl.program, 'a_PointSize');
 
@@ -79,6 +86,7 @@ function main(){
 }
 
 function initVertexBuffers(gl){
+	//Float32Array是类型化数组--此类数组不支持push与pop，创建类型化数组的唯一方式是 new ；
 	var vertices = new Float32Array([
 		0.0, 0.5, -0.5, 0.0, 0.0, -0.5, 0.5, 0.0
 	]);
@@ -91,18 +99,18 @@ function initVertexBuffers(gl){
 		return -1;
 	}
 
-	//将缓冲区对象绑定到目标
+	//将缓冲区对象绑定到目--将缓冲区vertexBuffer绑定到gl.ARRAY_BUFFER上
 	gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
 
-	//向缓冲区对象中写入数据
+	//向缓冲区对象中写入数据--开辟储存空间，向gl.ARRAY_BUFFER中写入vertices，即写入到缓冲区；
 	gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
 
 	var a_Position = gl.getAttribLocation(gl.program, 'a_Position');
 
-	//将缓冲区对象分配给a_Position变量
+	//将缓冲区对象分配给a_Position变量--将绑定到gl.ARRAY_BUFFER的缓冲区对象分配给由a_Position 指定的attribute变量
 	gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
 
-	//连接a_Position变量与分配给它的缓冲区对象
+	//连接a_Position变量与分配给它的缓冲区对象--开启a_Position指定的attribute变量
 	gl.enableVertexAttribArray(a_Position);
 
 	return n;
